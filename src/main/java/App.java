@@ -1,3 +1,7 @@
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.net.SocketPermission;
 
 public class App {
 
@@ -14,13 +18,20 @@ public class App {
     }
 
     public static void main(String[] args) {
-        App app = new App();
 
-        app.logEvent("Some funny event!");
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+
+        App app = (App) context.getBean("app");
+
+        app.logEvent("first event");
+        app.logEvent("second event");
+
     }
 
-    private void logEvent(String msg) {
-        String message = msg.replaceAll(client.getId(), client.getFullName());
-        eventLogger.logEvent(message);
+    public void logEvent (String msg){
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+
+        eventLogger = (ConsoleEventLogger) context.getBean("ConsoleEventLogger");
+        eventLogger.logEvent(msg);
     }
 }
