@@ -2,13 +2,19 @@
 public class App {
 
     private Client client;
-    private ConsoleEventLogger eventLogger;
+
+    private EventLogger eventLogger;
+
+    public App(){
+
+    }
+
+    public App (Client client, EventLogger eventLogger) {
+
+    }
 
     public static void main(String[] args) {
         App app = new App();
-
-        app.client = new Client ("1", "John Came");
-        app.eventLogger = new ConsoleEventLogger();
 
         app.logEvent("Some funny event!");
     }
